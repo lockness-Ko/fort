@@ -19,7 +19,7 @@
 {#if ext.endsWith(".jpg") || ext.endsWith(".png") || ext.endsWith(".webm") || ext.endsWith(".gif") || ext.endsWith(".apng") }
   <img src="/download/?{slug}"/>
 {:else if ext.endsWith(".mp4") || ext.endsWith(".webm") || ext.endsWith(".mov") }
-  <video src="/download/?{slug}"/>
+  <video src="/download/?{slug}" controls/>
 {:else if ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".flac") }
   <audio src="/download/?{slug}" controls/>
 {:else}
