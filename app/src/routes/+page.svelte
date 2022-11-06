@@ -4,7 +4,7 @@
   let files_promise = fetch('/api/files').then((x) => x.json());
 </script>
 
-<h1>hello, town</h1>
+<h1>🏰</h1>
 
 <div class="files">
   <ul>

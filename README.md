@@ -1,4 +1,4 @@
-# fort
+# fort 🏰
 
 A minimalistic alternative to nextcloud.
 
