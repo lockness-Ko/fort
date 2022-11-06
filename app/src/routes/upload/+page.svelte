@@ -2,7 +2,7 @@
   import FileUpload from 'sveltefileuploadcomponent';
   
   function gotFiles(files) {
-    files.detail.files.forEach((file) => {
+    files.detail.files.forEach((file, index) => {
       alert("Uploading file...");
       let data = new FormData();
       data.append('image', file);
@@ -11,10 +11,13 @@
       fetch('/api/files', {
         method: "POST",
         body: data
-      }).then(x => x.text()).then(y => alert(`Uploaded ${y}`));
+      }).then(x => x.text()).then(y => {
+        alert(`Uploaded ${y}`);
+        if (index == files.detail.files.length - 1) {
+          window.location = y;
+        }
+      });
     });
-    
-    window.location = "/";
   }
 </script>
 

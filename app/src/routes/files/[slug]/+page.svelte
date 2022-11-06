@@ -6,7 +6,10 @@
   
   let thumb = `/thumb/?${slug.split('.')[0]}.webp`;
   
-  let script = `<script>window.onload = () => { fetch('/download/?${slug}').then(x => x.text()).then(y => document.querySelector('#txt_container').textContent = y);}<\/script>`;
+  let contents_promise;
+  if (ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")) {
+    contents_promise = fetch(`/download/?${slug}`).then((x) => x.text());
+  }
 </script>
 
 <head>
@@ -25,8 +28,7 @@
 {:else if ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".flac") }
   <audio src="/download/?{slug}" controls/>
 {:else if ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")}
-  <pre id="txt_container"></pre>
-  {@html script}
+  <pre>{#await contents_promise then contents}{contents}{/await}</pre>
 {:else}
   <h3>Oh no! It looks like this file can't be previewed. <a href="/download/?{slug}" download>Click <u>here</u> to download instead.</a></h3>
 {/if}
