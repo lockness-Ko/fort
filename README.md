@@ -18,7 +18,7 @@ and visit the webpage in your browser.
 
 ## Todo
 
- - [ ] Docker support
+ - [x] Docker support
  - [x] Basic file upload and download
  - [ ] Support multiple files
  - [ ] The weather and stuff
