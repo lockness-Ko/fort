@@ -7,6 +7,7 @@ RUN apk add nodejs npm nginx
 WORKDIR /app
 COPY app .
 
+RUN npm install
 RUN npm run build
 
 CMD ["./run.sh"]
