@@ -20,6 +20,7 @@ and visit the webpage in your browser.
 
  - [x] Docker support
  - [x] Basic file upload and download
- - [ ] Support multiple files
+ - [ ] File browser
+ - [x] Support multiple files
  - [ ] The weather and stuff
  - [ ] Custom dashboard creation
