@@ -2,14 +2,19 @@
   import FileUpload from 'sveltefileuploadcomponent';
   
   function gotFiles(files) {
-    let data = new FormData();
-    data.append('image', files.detail.files[0]);
-    console.log(files.detail.files[0]);
+    files.detail.files.forEach((file) => {
+      alert("Uploading file...");
+      let data = new FormData();
+      data.append('image', file);
+      console.log(file);
     
-    fetch('/api/files', {
-      method: "POST",
-      body: data
-    }).then(x => x.text()).then(y => window.location = y);
+      fetch('/api/files', {
+        method: "POST",
+        body: data
+      }).then(x => x.text()).then(y => alert(`Uploaded ${y}`));
+    });
+    
+    window.location = "/";
   }
 </script>
 
