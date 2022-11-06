@@ -27,7 +27,6 @@
  */
 declare module '$env/static/private' {
 	export const ADMIN_LOGIN: string;
-	export const STORAGE_PATH: string;
 	export const SHELL: string;
 	export const npm_command: string;
 	export const WINDOWID: string;
@@ -90,6 +89,7 @@ declare module '$env/static/private' {
 	export const MAIL: string;
 	export const KITTY_INSTALLATION_DIR: string;
 	export const npm_node_execpath: string;
+	export const npm_config_engine_strict: string;
 	export const OLDPWD: string;
 	export const LADSPA_PATH: string;
 	export const CADENCE_AUTO_STARTED: string;
@@ -123,7 +123,6 @@ declare module '$env/static/public' {
 declare module '$env/dynamic/private' {
 	export const env: {
 		ADMIN_LOGIN: string;
-		STORAGE_PATH: string;
 		SHELL: string;
 		npm_command: string;
 		WINDOWID: string;
@@ -186,6 +185,7 @@ declare module '$env/dynamic/private' {
 		MAIL: string;
 		KITTY_INSTALLATION_DIR: string;
 		npm_node_execpath: string;
+		npm_config_engine_strict: string;
 		OLDPWD: string;
 		LADSPA_PATH: string;
 		CADENCE_AUTO_STARTED: string;

@@ -12,7 +12,7 @@ main {
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 2vw;
   left: 2vw;
 }

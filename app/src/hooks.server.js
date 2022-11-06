@@ -6,7 +6,7 @@ export const handle = async ({ event, resolve }) => {
 
     const auth = event.request.headers.get("Authorization");
 
-    if (!url.pathname.startsWith('/download') && !url.pathname.startsWith('/files')) {
+    if (!url.pathname.startsWith('/thumb') && !url.pathname.startsWith('/files')) {
       if (auth !== `Basic ${btoa(ADMIN_LOGIN)}`) {
           return new Response("Not authorized", {
               status: 401,

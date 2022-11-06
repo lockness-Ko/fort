@@ -12,6 +12,8 @@
 
 <style>
   header {
+    position: sticky;
+    top: 0;
     padding: 1rem;
     background: #2222222b;
     display: flex;

@@ -9,4 +9,4 @@
   <slot />
 </main>
 
-<footer>&copy;&nbsp; lockness-Ko 2022</footer>
+<footer>fort.</footer>

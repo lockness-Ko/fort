@@ -5,4 +5,4 @@
 
 <a href="/files/{filename}"><b>{filename}</b> - 
 <u>{date}</u></a> - 
-<a href="/download/{filename}" download>download</a>
+<a href="/download/?{filename}" download>download</a>
