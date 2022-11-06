@@ -3,6 +3,11 @@
   let slug = $page.params.slug;
 </script>
 
+<head>
+  <meta name="twitter:image" content="/download/{slug}">
+  <meta name="og:image" content="/download/{slug}">
+</head>
+
 <div class="header">
   <h1>{slug}</h1> <span><a href="/download/{slug}" download>download</a></span>
 </div>
