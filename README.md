@@ -6,7 +6,7 @@ A minimalistic alternative to nextcloud.
 
 To install, all you need is docker and docker-compose and common sense.
 
-You WILL need to edit `docker-compose.yml` and set the login credentials to something different.
+You WILL need to edit `app/.env` and change the default credentials!
 
 To run the service, type the following command:
 
