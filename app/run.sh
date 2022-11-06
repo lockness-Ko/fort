@@ -8,7 +8,7 @@ echo $STORAGE_PATH >> /app/.env
 
 mkdir -p $STORAGE_PATH/static/{download,thumb}
 
-npm run dev &
+npm run preview &
 nginx
 
 tail -f /var/log/nginx/access.log
