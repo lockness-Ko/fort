@@ -1,6 +1,6 @@
 #! /bin/ash
 
-npm run preview &
+npm run dev &
 
 nginx
 
