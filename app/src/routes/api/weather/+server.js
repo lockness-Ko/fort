@@ -69,14 +69,23 @@ export async function GET({ url }) {
   let cloudcover = weather.hourly.cloudcover[idx];
   let precipitation = weather.hourly.precipitation[idx];
   
+  let temp_unit = weather.hourly_units.temperature_2m;
+  let humidity_unit = weather.hourly_units.relativehumidity_2m;
+  let cloudcover_unit = weather.hourly_units.cloudcover;
+  let precipitation_unit = weather.hourly_units.precipitation;
+  
   let out_data = {
     "emoji": emoji,
     "temperature": temp,
+    "temperature_unit": temp_unit,
     "wind_speed": wind_speed,
     "wind_direction": wind_direction,
     "humidity": humidity,
+    "humidity_unit": humidity_unit,
     "cloud_cover": cloudcover,
+    "cloud_cover_unit": cloudcover_unit,
     "precipitation": precipitation
+    "precipitation_unit": precipitation_unit
   }
   
   return new Response(JSON.stringify(out_data));
