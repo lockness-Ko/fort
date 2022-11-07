@@ -26,6 +26,14 @@
     fetch(`/api/files?name=${pwd}${prompt("File name?")}`).then(_ => {})
     files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
   }
+  
+  function backPwd() {
+    let temPwd = pwd.split("/");
+    temPwd.pop();
+    temPwd.pop();
+    pwd = "/" + temPwd.join("/");
+    files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
+  }
 </script>
 
 <div class="files-header">
@@ -34,6 +42,9 @@
   <h4 on:click={createFolder}>📁</h4>
 </div>
 <ul>
+  <li on:click={backPwd}>
+    ..
+  </li>
   {#await files_promise then files}
     {#each files as file}
     <li>
