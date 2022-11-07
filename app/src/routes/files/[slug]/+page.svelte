@@ -21,6 +21,8 @@
   <h1>{slug}</h1> <span><a href="/download/?{slug}" download>download</a></span>
 </div>
 
+<hr/>
+
 {#if ext.endsWith(".jpg") || ext.endsWith(".png") || ext.endsWith(".webp") || ext.endsWith(".gif") || ext.endsWith(".apng") }
   <img src="/download/?{slug}"/>
 {:else if ext.endsWith(".mp4") || ext.endsWith(".webm") || ext.endsWith(".mov") }
