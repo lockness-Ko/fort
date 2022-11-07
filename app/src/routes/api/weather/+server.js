@@ -1,7 +1,7 @@
 import { LAT, LON } from "$env/static/private";
 
 export async function GET({ url }) {
-  let weather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true&hourly=relativehumidity_2m,cloudcover,precipitation`);
+  let weather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,cloudcover,precipitation`);
   weather = await weather.json();
 
   // the json api uses a weird key for time
@@ -87,6 +87,8 @@ export async function GET({ url }) {
     "precipitation": precipitation,
     "precipitation_unit": precipitation_unit
   }
+  
+  console.log(temp_unit);
   
   return new Response(JSON.stringify(out_data));
 }
