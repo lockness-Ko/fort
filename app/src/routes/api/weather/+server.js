@@ -1,7 +1,7 @@
 import { LAT, LON } from "$env/static/private";
 
 export async function GET({ url }) {
-  let weather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true&hourly=temperature_2m,relativehumidity_2m,cloudcover,precipitation`);
+  let weather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&timezone=GMT&current_weather=true&hourly=temperature_2m,relativehumidity_2m,cloudcover,precipitation&daily=weathercode,temperature_2m_max,temperature_2m_min`);
   weather = await weather.json();
 
   // the json api uses a weird key for time
@@ -61,6 +61,11 @@ export async function GET({ url }) {
   let code = codes[weather_code];
   let emoji = emojis[code];
   
+  let forecast = [];
+  for (let i = 0; i < 5; i ++) {
+    forecast.push([weather.daily.weathercode[i+1], weather.daily.temperature_2m_max[i+1], weather.daily.temperature_2m_min[i+1]]);
+  }
+  
   let temp = weather.current_weather.temperature;
   let wind_speed = weather.current_weather.windspeed;
   let wind_direction = weather.current_weather.winddirection;
@@ -85,10 +90,9 @@ export async function GET({ url }) {
     "cloud_cover": cloudcover,
     "cloud_cover_unit": cloudcover_unit,
     "precipitation": precipitation,
-    "precipitation_unit": precipitation_unit
+    "precipitation_unit": precipitation_unit,
+    "forecast": forecast
   }
-  
-  console.log(temp_unit);
   
   return new Response(JSON.stringify(out_data));
 }
