@@ -32,6 +32,12 @@ and visit the webpage in your browser.
  - [x] Basic file upload and download
  - [x] No third-party cross-origin nonsense on client-side
  - [x] File browser
+ - [ ] File editor
+	 - [ ] Create files
+	 - [ ] Create folders
+	 - [ ] Rename files
+	 - [ ] Rename folders
+	 - [ ] Edit files
  - [x] Support multiple files
  - [x] The weather and stuff
  - [ ] Custom dashboard creation
