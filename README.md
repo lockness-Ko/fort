@@ -30,8 +30,8 @@ and visit the webpage in your browser.
 
  - [x] Docker support
  - [x] Basic file upload and download
- - [ ] No third-party cross-origin nonsense (3rd party weather api 😔)
+ - [x] No third-party cross-origin nonsense on client-side
  - [ ] File browser
  - [x] Support multiple files
  - [ ] The weather and stuff
- - [ ] Custom dashboard creation
+ - [x] Custom dashboard creation
