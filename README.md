@@ -31,7 +31,7 @@ and visit the webpage in your browser.
  - [x] Docker support
  - [x] Basic file upload and download
  - [x] No third-party cross-origin nonsense on client-side
- - [ ] File browser
+ - [x] File browser
  - [x] Support multiple files
  - [x] The weather and stuff
  - [ ] Custom dashboard creation
