@@ -1,7 +1,11 @@
 <script>
   import { page } from '$app/stores';
+  import { createPatch, applyPatch } from 'diff';
+  
   let slug = $page.params.slug;
   let pwd = $page.url.searchParams.get('pwd') || '/';
+  
+  let diff = "";
   
   let ext = slug.toLowerCase();
   
@@ -10,6 +14,20 @@
   let contents_promise;
   if (ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")) {
     contents_promise = fetch(`/download/?${pwd}${slug}`).then((x) => x.text());
+  }
+  
+  function editDiff(e) {
+    let patch = createPatch(slug, diff, e.target.value, "", "");
+    fetch(`/api/files?${pwd}${slug}`, {
+      method: 'PATCH',
+      body: patch
+    })
+    diff = e.target.value;
+  }
+  
+  function setDiff(e) {
+    console.log("loaded");
+    diff = document.querySelector("#txt-editor-area").value;
   }
 </script>
 
@@ -31,7 +49,9 @@
 {:else if ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".flac") }
   <audio src="/download/?{pwd}{slug}" controls/>
 {:else if ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")}
-  <pre>{#await contents_promise then contents}{contents}{/await}</pre>
+  <div class="txt-editor">
+    {#await contents_promise then contents}<textarea id="txt-editor-area" use:setDiff on:mouseover={editDiff} on:change={editDiff} placeholder="Loading..." value={contents}></textarea>{/await}
+  </div>
 {:else}
   <h3>Oh no! It looks like this file can't be previewed. <a href="/download/?{pwd}{slug}" download>Click <u>here</u> to download instead.</a></h3>
 {/if}
@@ -49,5 +69,23 @@
   
   .header {
     display: flex;
+  }
+  
+  .txt-editor {
+    display: flex;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 500px;
+    border: none;
+    margin: auto;
+    border-radius: 4px;
+    padding: 12px 15px;
+    outline: none;
+    resize: none;
+    color: #eee;
+    font-size: 15px;
+    background-color: #333;
   }
 </style>

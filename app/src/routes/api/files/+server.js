@@ -1,8 +1,23 @@
-import { writeFile, mkdir } from 'fs/promises';
+import { writeFile, readFile, mkdir } from 'fs/promises';
 import { readdirSync, statSync, lstatSync } from 'fs';
 import { STORAGE_PATH } from "$env/static/private";
 import url from 'url';
+import { applyPatch } from 'diff';
 // import sharp from 'sharp';
+
+export async function PATCH ({ request }) {
+  let filename = decodeURI(new url.URL(request.url).search.split('?')[1]);
+  let contents = await readFile(`${STORAGE_PATH}/static/download${filename}`);
+  contents = contents.toString();
+  let patch = await request.text();
+  
+  let result = applyPatch(contents, patch);
+
+  await writeFile(`${STORAGE_PATH}/static/download/${filename}`, result);
+  // console.log(String(contents));
+  
+  return new Response('ok!');
+};
 
 export async function POST ({ request }) {
   let pwd = new url.URL(request.url).searchParams.get('pwd');

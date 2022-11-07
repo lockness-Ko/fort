@@ -15,6 +15,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"diff": "^5.1.0",
 		"sveltefileuploadcomponent": "^0.1.0"
 	}
 }
