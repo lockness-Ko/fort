@@ -1,5 +1,7 @@
 #! /bin/ash
 
+echo $ADMIN_LOGIN $STORAGE_PATH $LAT $LON
+
 echo -n "ADMIN_LOGIN=" > /app/.env
 echo $ADMIN_LOGIN > /app/.env
 

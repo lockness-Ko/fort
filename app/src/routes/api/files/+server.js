@@ -2,7 +2,7 @@ import { writeFile, mkdir } from 'fs/promises';
 import { readdirSync, statSync, lstatSync } from 'fs';
 import { STORAGE_PATH } from "$env/static/private";
 import url from 'url';
-import sharp from 'sharp';
+// import sharp from 'sharp';
 
 export async function POST ({ request }) {
   let pwd = new url.URL(request.url).searchParams.get('pwd');
@@ -11,15 +11,15 @@ export async function POST ({ request }) {
   const file = data.get('image');
   await writeFile(`${STORAGE_PATH}/static/download/${pwd}${file.name}`, file.stream());
 
-  let name = file.name.toLowerCase();
+  // let name = file.name.toLowerCase();
   
-  let f = Buffer.from(await file.arrayBuffer());
+  // let f = Buffer.from(await file.arrayBuffer());
   
-  if (name.endsWith('.png') || name.endsWith('.jpg')) {
-    await sharp(f)
-      .webp({ quality: 20 })
-      .toFile(`${STORAGE_PATH}/static/thumb/${pwd}${file.name.split('.')[0]}.webp`);
-  }
+  // if (name.endsWith('.png') || name.endsWith('.jpg')) {
+  //   await sharp(f)
+  //     .webp({ quality: 20 })
+  //     .toFile(`${STORAGE_PATH}/static/thumb/${pwd}${file.name.split('.')[0]}.webp`);
+  // }
 
   return new Response(`/files/${file.name}?pwd=${pwd}`);
 };
