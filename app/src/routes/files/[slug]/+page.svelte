@@ -5,7 +5,7 @@
   
   let ext = slug.toLowerCase();
   
-  let thumb = `/thumb/?${slug.split('.')[0]}.webp`;
+  let thumb = `/thumb/?${pwd}${slug.split('.')[0]}.webp`;
   
   let contents_promise;
   if (ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")) {
