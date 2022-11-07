@@ -33,8 +33,9 @@ and visit the webpage in your browser.
  - [x] No third-party cross-origin nonsense on client-side
  - [x] File browser
  - [ ] File editor
-	 - [ ] Create files
-	 - [ ] Create folders
+	 - [x] Create files
+	 - [x] Create folders
+	 - [x] Upload files to directory
 	 - [ ] Rename files
 	 - [ ] Rename folders
 	 - [ ] Edit files
