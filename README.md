@@ -4,6 +4,7 @@ A minimalistic alternative to nextcloud.
 
 ## Screenshots
 
+![](assets/weather.png)
 ![](assets/files_poc.png)
 ![](assets/files_readme.png)
 ![](assets/upload.png)
