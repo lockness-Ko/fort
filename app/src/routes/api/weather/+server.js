@@ -7,7 +7,7 @@ export async function GET({ url }) {
   // the json api uses a weird key for time
   // let currTime = new Date().toISOString().replace("Z", "").split(".")[0].replace(/(.){3}$/,"").replace(/(.){2}$/,"00");
   let currTime = weather.current_weather.time;
-  let idx = weather.indexOf(currTime);
+  let idx = weather.hourly.time.indexOf(currTime);
   
   let emojis = {
     "cls": "🌞",
