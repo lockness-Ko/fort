@@ -42,8 +42,10 @@
 
 <hr/>
 
-{#if ext.endsWith(".jpg") || ext.endsWith(".svg") || ext.endsWith(".png") || ext.endsWith(".webp") || ext.endsWith(".gif") || ext.endsWith(".apng") }
+{#if ext.endsWith(".jpg") || ext.endsWith(".png") || ext.endsWith(".webp") || ext.endsWith(".gif") || ext.endsWith(".apng") }
   <img src="/download/?{pwd}{slug}"/>
+{:else if ext.endsWith(".svg") }
+  <svg src="/download/?{pwd}{slug}"/>
 {:else if ext.endsWith(".mp4") || ext.endsWith(".webm") || ext.endsWith(".mov") }
   <video src="/download/?{pwd}{slug}" controls/>
 {:else if ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".flac") }
