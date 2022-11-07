@@ -1,6 +1,17 @@
 import { LAT, LON } from "$env/static/private";
 
+let cached = "";
+let ttl = getSecs() - 300;
+
+function getSecs() {
+  return Math.round(new Date().getTime() / 1000);
+}
+
 export async function GET({ url }) {
+  if (getSecs() - ttl < 300) {
+    return new Response(cached);
+  }
+    
   let weather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&timezone=GMT&current_weather=true&hourly=temperature_2m,relativehumidity_2m,cloudcover,precipitation&daily=weathercode,temperature_2m_max,temperature_2m_min`);
   weather = await weather.json();
 
@@ -94,5 +105,7 @@ export async function GET({ url }) {
     "forecast": forecast
   }
   
-  return new Response(JSON.stringify(out_data));
+  ttl = getSecs();
+  cached = JSON.stringify(out_data);
+  return new Response(cached);
 }
