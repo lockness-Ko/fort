@@ -1,6 +1,6 @@
 <script>
 
-  let pwd = "/";
+  export let pwd = "/";
   let files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
   
   function clicked(e) {
@@ -16,9 +16,23 @@
       files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
     }
   }
+  
+  function createFolder() {
+    fetch(`/api/files?folder_name=${pwd}${prompt("Folder name?")}`).then(_ => {})
+    files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
+  }
+  
+  function createFile() {
+    fetch(`/api/files?name=${pwd}${prompt("File name?")}`).then(_ => {})
+    files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
+  }
 </script>
 
-<h3>Files</h3>
+<div class="files-header">
+  <h3>Files</h3>
+  <h4 on:click={createFile}>➕</h4>
+  <h4 on:click={createFolder}>📁</h4>
+</div>
 <ul>
   {#await files_promise then files}
     {#each files as file}
@@ -47,5 +61,18 @@
   
   u, a {
     width: 50%
+  }
+  
+  .files-header {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .files-header h4 {
+    width: 5%;
+  }
+  
+  .files-header h3 {
+    width: 3em;
   }
 </style>

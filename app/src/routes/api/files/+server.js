@@ -1,12 +1,15 @@
-import { writeFile } from 'fs/promises';
-import { readdirSync, statSync } from 'fs';
+import { writeFile, mkdir } from 'fs/promises';
+import { readdirSync, statSync, lstatSync } from 'fs';
 import { STORAGE_PATH } from "$env/static/private";
+import url from 'url';
 import sharp from 'sharp';
 
 export async function POST ({ request }) {
+  let pwd = new url.URL(request.url).searchParams.get('pwd');
+  
   const data = await request.formData();
   const file = data.get('image');
-  await writeFile(`${STORAGE_PATH}/static/download/${file.name}`, file.stream());
+  await writeFile(`${STORAGE_PATH}/static/download/${pwd}${file.name}`, file.stream());
 
   let name = file.name.toLowerCase();
   
@@ -15,20 +18,33 @@ export async function POST ({ request }) {
   if (name.endsWith('.png') || name.endsWith('.jpg')) {
     await sharp(f)
       .webp({ quality: 20 })
-      .toFile(`${STORAGE_PATH}/static/thumb/${file.name.split('.')[0]}.webp`);
+      .toFile(`${STORAGE_PATH}/static/thumb/${pwd}${file.name.split('.')[0]}.webp`);
   }
 
-  return new Response(`/files/${file.name}`);
+  return new Response(`/files/${file.name}?pwd=${pwd}`);
 };
 
 export async function GET({ url }) {
+  let folder = url.searchParams.get('folder_name');
+  let file = url.searchParams.get('name');
+  
+  if (folder != null) {
+    mkdir(`${STORAGE_PATH}/static/download/${folder}`, { recursive: true });
+    mkdir(`${STORAGE_PATH}/static/thumb/${folder}`, { recursive: true });
+    return new Response("ok!");
+  } else if (file != null) {
+    await writeFile(`${STORAGE_PATH}/static/download/${file}`, "");
+    return new Response("ok!");
+  }
+  
   let pwd = url.searchParams.get('pwd');
   let files = readdirSync(`${STORAGE_PATH}/static/download${pwd}`);
   
   files = files.map((file) => {
     let stat = statSync(`${STORAGE_PATH}/static/download/${pwd}/${file}`);
+    let lstat = lstatSync(`${STORAGE_PATH}/static/download/${pwd}/${file}`).isDirectory();
     let date = new Date(stat.ctimeMs);
-    return { "name": file, "date": date, "type": stat.blocks == 0 ? "dir" : "file" }
+    return { "name": file, "date": date, "type": lstat ? "dir" : "file" }
   });
   
   let glob = JSON.stringify(files);

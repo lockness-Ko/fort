@@ -1,6 +1,8 @@
 <script>
   import FileUpload from 'sveltefileuploadcomponent';
+  import Files from '$lib/components/Files.svelte'
   
+  let pwd = "/";
   function gotFiles(files) {
     files.detail.files.forEach((file, index) => {
       alert("Uploading file...");
@@ -8,7 +10,7 @@
       data.append('image', file);
       console.log(file);
     
-      fetch('/api/files', {
+      fetch(`/api/files?pwd=${pwd}`, {
         method: "POST",
         body: data
       }).then(x => x.text()).then(y => {
@@ -19,6 +21,7 @@
       });
     });
   }
+  
 </script>
 
 <h1>upload</h1>
@@ -26,6 +29,8 @@
 <div class="file_upload">
   <FileUpload on:input={gotFiles}/>
 </div>
+
+<Files bind:pwd={pwd} />
 
 <style>
 
