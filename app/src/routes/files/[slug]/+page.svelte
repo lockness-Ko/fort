@@ -12,7 +12,7 @@
   let thumb = `/thumb/?${pwd}${slug.split('.')[0]}.webp`;
   
   let contents_promise;
-  if (ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")) {
+  if (ext.endsWith(".txt") || ext.endsWith(".yml") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")) {
     contents_promise = fetch(`/download/?${pwd}${slug}`).then((x) => x.text());
   }
   
@@ -48,7 +48,7 @@
   <video src="/download/?{pwd}{slug}" controls/>
 {:else if ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".flac") }
   <audio src="/download/?{pwd}{slug}" controls/>
-{:else if ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")}
+{:else if ext.endsWith(".txt") || ext.endsWith(".yml") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")}
   <div class="txt-editor">
     {#await contents_promise then contents}<textarea id="txt-editor-area" use:setDiff on:mouseover={editDiff} on:change={editDiff} placeholder="Loading..." value={contents}></textarea>{/await}
   </div>
