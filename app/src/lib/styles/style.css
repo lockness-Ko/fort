@@ -21,3 +21,20 @@ a {
   text-decoration: none;
   color: #ddd;
 }
+
+.weather-current {
+  display: flex;
+  flex-direction: row;
+}
+
+.weather-left {
+  width: 50%
+}
+
+.weather-left h1 {
+  margin-top: 0px;
+}
+
+.weather-right {
+  width: 50%
+}

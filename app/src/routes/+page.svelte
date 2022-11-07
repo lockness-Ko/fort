@@ -3,17 +3,25 @@
 
   let files_promise = fetch('/api/files').then((x) => x.json());
   let weather_promise = fetch('/api/weather').then((x) => x.json());
-  
-  let emojis = ["🌞", "☁️", "🌧️", "⛈️"];
 </script>
 
 <h1>🏰</h1>
 
 <div class="weather">
-  {#await weather_promise then weather}
-  <h3>Weather { weather["current_weather"]["temperature"] > 20 ? emojis[0] : emojis[1] }</h3>
-    <p>Temperature: {weather["current_weather"]["temperature"]}</p>
-  {/await}
+  <div class="weather-current">
+    {#await weather_promise then weather}
+    <div class="weather-left">
+      <h1>{ weather["emoji"] }</h1>
+      <p>🌡️ { weather["temperature"] }{ weather["temperature_unit"] }</p>
+      <p>🌧 { weather["precipitation"] }{ weather["precipitation_unit"] }</p>
+    </div>
+    <div class="weather-right">
+      <p>🌬️ { weather["wind_speed"] }@{ weather["wind_direction"] }°</p>
+      <p>🥵 { weather["humidity"] }{ weather["humidity_unit"] }</p>
+      <p>😶‍🌫️{ weather["cloud_cover"] }{ weather["cloud_cover_unit"] }</p>
+    </div>
+    {/await}
+  </div>
 </div>
 
 <hr/>
