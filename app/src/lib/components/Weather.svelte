@@ -33,7 +33,7 @@
   {#each weather["forecast"] as forecast, i}
   <div class="weather-forecast-item">
     <h1>{forecast[0]}</h1>
-    <p>{toDayName(i+1)}</p>
+    <p>{toDayName(new Date().getDay() + i+1)}</p>
     <p>🥵 {forecast[1]}{ weather["temperature_unit"] }</p>
     <p>🥶 {forecast[2]}{ weather["temperature_unit"] }</p>
   </div>
