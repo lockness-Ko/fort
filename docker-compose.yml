@@ -10,5 +10,8 @@ services:
       - ADMIN_LOGIN=admin:admin
       # location of all files
       - STORAGE_PATH=/app/storage
+      # location info for weather
+      - LAT=0.00
+      - LON=0.00
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
