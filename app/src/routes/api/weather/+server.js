@@ -84,7 +84,7 @@ export async function GET({ url }) {
     "humidity_unit": humidity_unit,
     "cloud_cover": cloudcover,
     "cloud_cover_unit": cloudcover_unit,
-    "precipitation": precipitation
+    "precipitation": precipitation,
     "precipitation_unit": precipitation_unit
   }
   
