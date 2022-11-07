@@ -5,10 +5,22 @@ echo $ADMIN_LOGIN $STORAGE_PATH $LAT $LON
 echo -n "ADMIN_LOGIN=" > /app/.env
 echo $ADMIN_LOGIN > /app/.env
 
-echo -n "STORAGE_PATH=" > /app/.env
+echo -n "STORAGE_PATH=" >> /app/.env
 echo $STORAGE_PATH >> /app/.env
 
-mkdir -p $STORAGE_PATH/static/{download,thumb}
+echo -n "LAT" >> /app/.env
+echo $LAT >> /app/.env
+
+echo -n "LON=" >> /app/.env
+echo $LON >> /app/.env
+
+cat /app/.env
+
+echo HIHHIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIi
+echo HIHHIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIi
+echo HIHHIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIi
+
+mkdir -p $STORAGE_PATH/static/download $STORAGE_PATH/static/thumb
 
 npm run preview &
 nginx
