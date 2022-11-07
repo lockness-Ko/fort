@@ -33,5 +33,5 @@ and visit the webpage in your browser.
  - [x] No third-party cross-origin nonsense on client-side
  - [ ] File browser
  - [x] Support multiple files
- - [ ] The weather and stuff
- - [x] Custom dashboard creation
+ - [x] The weather and stuff
+ - [ ] Custom dashboard creation

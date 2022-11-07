@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/stores';
   let slug = $page.params.slug;
+  let pwd = $page.url.searchParams.get('pwd') || '/';
   
   let ext = slug.toLowerCase();
   
@@ -8,7 +9,7 @@
   
   let contents_promise;
   if (ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")) {
-    contents_promise = fetch(`/download/?${slug}`).then((x) => x.text());
+    contents_promise = fetch(`/download/?${pwd}${slug}`).then((x) => x.text());
   }
 </script>
 
@@ -18,21 +19,21 @@
 </head>
 
 <div class="header">
-  <h1>{slug}</h1> <span><a href="/download/?{slug}" download>download</a></span>
+  <h1>{slug}</h1> <span><a href="/download/?{pwd}{slug}" download>download</a></span>
 </div>
 
 <hr/>
 
 {#if ext.endsWith(".jpg") || ext.endsWith(".png") || ext.endsWith(".webp") || ext.endsWith(".gif") || ext.endsWith(".apng") }
-  <img src="/download/?{slug}"/>
+  <img src="/download/?{pwd}{slug}"/>
 {:else if ext.endsWith(".mp4") || ext.endsWith(".webm") || ext.endsWith(".mov") }
-  <video src="/download/?{slug}" controls/>
+  <video src="/download/?{pwd}{slug}" controls/>
 {:else if ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".flac") }
-  <audio src="/download/?{slug}" controls/>
+  <audio src="/download/?{pwd}{slug}" controls/>
 {:else if ext.endsWith(".txt") || ext.endsWith(".c") || ext.endsWith(".cc") || ext.endsWith(".rs") || ext.endsWith(".py") || ext.endsWith(".js") || ext.endsWith(".html") || ext.endsWith(".css") || ext.endsWith(".sh") || ext.endsWith(".md")}
   <pre>{#await contents_promise then contents}{contents}{/await}</pre>
 {:else}
-  <h3>Oh no! It looks like this file can't be previewed. <a href="/download/?{slug}" download>Click <u>here</u> to download instead.</a></h3>
+  <h3>Oh no! It looks like this file can't be previewed. <a href="/download/?{pwd}{slug}" download>Click <u>here</u> to download instead.</a></h3>
 {/if}
 
 <style>

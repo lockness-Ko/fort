@@ -22,11 +22,13 @@ export async function POST ({ request }) {
 };
 
 export async function GET({ url }) {
-  let files = readdirSync(`${STORAGE_PATH}/static/download`);
+  let pwd = url.searchParams.get('pwd');
+  let files = readdirSync(`${STORAGE_PATH}/static/download${pwd}`);
   
   files = files.map((file) => {
-    let date = new Date(statSync(`${STORAGE_PATH}/static/download/${file}`).ctimeMs);
-    return { "name": file, "date": date }
+    let stat = statSync(`${STORAGE_PATH}/static/download/${pwd}/${file}`);
+    let date = new Date(stat.ctimeMs);
+    return { "name": file, "date": date, "type": stat.blocks == 0 ? "dir" : "file" }
   });
   
   let glob = JSON.stringify(files);
