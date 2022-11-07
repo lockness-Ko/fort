@@ -38,3 +38,24 @@ a {
 .weather-right {
   width: 50%
 }
+
+.weather-forecast {
+  display: flex;
+  flex-direction: row;
+}
+
+.weather-forecast-item {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  border-left: solid 2px #444;
+  border-right: solid 2px #444;
+}
+
+.weather-forecast-item p, h1 {
+  margin: auto;
+}
+
+.weather-forecast-item h1 {
+  margin-bottom: 2vw;
+}

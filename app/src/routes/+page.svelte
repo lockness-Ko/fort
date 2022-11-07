@@ -3,13 +3,26 @@
 
   let files_promise = fetch('/api/files').then((x) => x.json());
   let weather_promise = fetch('/api/weather').then((x) => x.json());
+  
+  let days = {
+    1: "mon",
+    2: "tue",
+    3: "wed",
+    4: "thu",
+    5: "fri",
+    6: "sat",
+    7: "sun",
+  };
+  function toDayName(day) {
+    return days[day]
+  }
 </script>
 
 <h1>🏰</h1>
 
 <div class="weather">
+  {#await weather_promise then weather}
   <div class="weather-current">
-    {#await weather_promise then weather}
     <div class="weather-left">
       <h1>{ weather["emoji"] }</h1>
       <p>🌡️ { weather["temperature"] }{ weather["temperature_unit"] }</p>
@@ -20,8 +33,19 @@
       <p>🥵 { weather["humidity"] }{ weather["humidity_unit"] }</p>
       <p>😶‍🌫️{ weather["cloud_cover"] }{ weather["cloud_cover_unit"] }</p>
     </div>
-    {/await}
   </div>
+  <hr/>
+  <div class="weather-forecast">
+    {#each weather["forecast"] as forecast, i}
+    <div class="weather-forecast-item">
+      <h1>{forecast[0]}</h1>
+      <p>{toDayName(i+1)}</p>
+      <p>🥵 {forecast[1]}{ weather["temperature_unit"] }</p>
+      <p>🥶 {forecast[2]}{ weather["temperature_unit"] }</p>
+    </div>
+    {/each}
+  </div>
+  {/await}
 </div>
 
 <hr/>

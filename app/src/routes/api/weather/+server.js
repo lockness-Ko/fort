@@ -63,7 +63,7 @@ export async function GET({ url }) {
   
   let forecast = [];
   for (let i = 0; i < 5; i ++) {
-    forecast.push([weather.daily.weathercode[i+1], weather.daily.temperature_2m_max[i+1], weather.daily.temperature_2m_min[i+1]]);
+    forecast.push([emojis[codes[weather.daily.weathercode[i+1]]], weather.daily.temperature_2m_max[i+1], weather.daily.temperature_2m_min[i+1]]);
   }
   
   let temp = weather.current_weather.temperature;
