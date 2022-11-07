@@ -52,7 +52,7 @@ a {
   border-right: solid 2px #444;
 }
 
-.weather-forecast-item p, h1 {
+.weather-forecast-item p,.weather-forecast-item h1 {
   margin: auto;
 }
 
