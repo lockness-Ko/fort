@@ -38,7 +38,7 @@ and visit the webpage in your browser.
 	 - [x] Upload files to directory
 	 - [ ] Rename files
 	 - [ ] Rename folders
-	 - [ ] Edit files
+	 - [x] Edit text files
  - [x] Support multiple files
  - [x] The weather and stuff
  - [ ] Custom dashboard creation
