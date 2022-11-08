@@ -1,7 +1,6 @@
 #! /bin/ash
 
-echo $ADMIN_LOGIN $STORAGE_PATH $LAT $LON
-
+# Setup environment vars
 echo -n "ADMIN_LOGIN=" > /app/.env
 echo $ADMIN_LOGIN > /app/.env
 
@@ -16,9 +15,16 @@ echo $LON >> /app/.env
 
 cat /app/.env
 
+# Setup storage
 mkdir -p $STORAGE_PATH/static/download $STORAGE_PATH/static/thumb
 
+# Setup ssl certs
+mkdir -p /app/certs
+openssl req -batch -x509 -nodes -days 365 -newkey rsa:2048 -keyout /app/certs/fort.key -out /app/certs/fort.crt
+
+# Run web app
 npm run preview &
 nginx
 
+# Run forever
 tail -f /var/log/nginx/access.log
