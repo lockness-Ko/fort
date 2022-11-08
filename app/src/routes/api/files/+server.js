@@ -7,6 +7,9 @@ import { applyPatch } from 'diff';
 
 export async function PATCH ({ request }) {
   let filename = decodeURI(new url.URL(request.url).search.split('?')[1]);
+  if (filename.includes('..')) {
+    return new Response(400);
+  }
   let contents = await readFile(`${STORAGE_PATH}/static/download${filename}`);
   contents = contents.toString();
   let patch = await request.text();
@@ -21,6 +24,10 @@ export async function PATCH ({ request }) {
 
 export async function POST ({ request }) {
   let pwd = new url.URL(request.url).searchParams.get('pwd');
+  
+  if (pwd.includes('..')) {
+    return new Response(400);
+  }
   
   const data = await request.formData();
   const file = data.get('image');
@@ -43,6 +50,10 @@ export async function GET({ url }) {
   let folder = url.searchParams.get('folder_name');
   let file = url.searchParams.get('name');
   
+  if (file.includes('..') || folder.includes('..')) {
+    return new Response(400);
+  }
+  
   if (folder != null) {
     mkdir(`${STORAGE_PATH}/static/download/${folder}`, { recursive: true });
     mkdir(`${STORAGE_PATH}/static/thumb/${folder}`, { recursive: true });
@@ -53,6 +64,9 @@ export async function GET({ url }) {
   }
   
   let pwd = url.searchParams.get('pwd');
+  if (pwd.includes('..')) {
+    return new Response(400);
+  }
   let files = readdirSync(`${STORAGE_PATH}/static/download${pwd}`);
   
   files = files.map((file) => {
