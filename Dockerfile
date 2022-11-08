@@ -4,6 +4,9 @@ FROM alpine:latest
 RUN apk update
 RUN apk add nodejs npm nginx openssl
 
+COPY prepare.sh .
+RUN ./prepare.sh
+
 WORKDIR /app
 COPY app .
 
