@@ -4,7 +4,7 @@ services:
   www:
     build: .
     ports:
-      - 8080:80
+      - 8443:443
     environment:
       # please for the love of god, change this
       - ADMIN_LOGIN=admin:admin
