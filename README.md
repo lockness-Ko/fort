@@ -39,6 +39,7 @@ and visit the webpage in your browser.
 	 - [ ] Rename files
 	 - [ ] Rename folders
 	 - [x] Edit text files
+ - [x] HTTP/2 support
  - [x] Support multiple files
  - [x] The weather and stuff
  - [ ] Custom dashboard creation
