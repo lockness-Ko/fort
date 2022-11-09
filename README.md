@@ -40,7 +40,11 @@ and visit the webpage in your browser.
 	 - [x] Rename files
 	 - [ ] Rename folders
 	 - [x] Edit text files
- - [x] HTTP/2 support
+ - [ ] Layer 7 stuff
+   - [x] HTTP/2 support
+   - [ ] HTTP/3 support
+   - [x] TLS support
+ - [ ] Upload progress bar
  - [x] Support multiple files
  - [x] The weather and stuff
  - [ ] Custom dashboard creation
