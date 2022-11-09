@@ -36,7 +36,8 @@ and visit the webpage in your browser.
 	 - [x] Create files
 	 - [x] Create folders
 	 - [x] Upload files to directory
-	 - [ ] Rename files
+	 - [x] Delete files
+	 - [x] Rename files
 	 - [ ] Rename folders
 	 - [x] Edit text files
  - [x] HTTP/2 support
