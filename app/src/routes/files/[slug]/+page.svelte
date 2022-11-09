@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/stores';
-  import { createPatch, applyPatch } from 'diff';
+  import { createPatch, createTwoFilesPatch, applyPatch } from 'diff';
   
   let slug = $page.params.slug;
   let pwd = $page.url.searchParams.get('pwd') || '/';
@@ -18,11 +18,19 @@
   
   function editDiff(e) {
     let patch = createPatch(slug, diff, e.target.value, "", "");
-    fetch(`/api/files?${pwd}${slug}`, {
+    fetch(`/api/files?pwd=${pwd}&filename=${slug}`, {
       method: 'PATCH',
       body: patch
     })
     diff = e.target.value;
+  }
+  
+  function nameDiff(e) {
+    let patch = createTwoFilesPatch(slug, e.target.value, "", "", "", "");
+    fetch(`/api/files?pwd=${pwd}&filename=${slug}`, {
+      method: 'PATCH',
+      body: patch
+    }).then(x => x.text()).then(y => window.location = `/files/${e.target.value}?pwd=${pwd}`)
   }
   
   function setDiff(e) {
@@ -37,7 +45,7 @@
 </head>
 
 <div class="header">
-  <h1>{slug}</h1> <span><a href="/download/?{pwd}{slug}" download>download</a></span>
+  <input type="text" on:change={nameDiff} value={slug}/> <span><a href="/delete?{pwd}{slug}">delete</a><a href="/download/?{pwd}{slug}" download>download</a></span>
 </div>
 
 <hr/>
@@ -69,6 +77,10 @@
     margin-right: 10px;
   }
   
+  span a {
+    margin: 10px;
+  }
+  
   .header {
     display: flex;
   }
@@ -89,5 +101,13 @@
     color: #eee;
     font-size: 15px;
     background-color: #333;
+  }
+  
+  input {
+    background-color: #0000;
+    color: white;
+    border: none;
+    font-size: 30px;
+    outline: none;
   }
 </style>

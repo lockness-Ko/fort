@@ -1,27 +1,34 @@
-import { writeFile, readFile, mkdir } from 'fs/promises';
+import { writeFile, readFile, mkdir, rename } from 'fs/promises';
 import { readdirSync, statSync, lstatSync } from 'fs';
 import { STORAGE_PATH } from "$env/static/private";
 import url from 'url';
-import { applyPatch } from 'diff';
+import { applyPatch, parsePatch } from 'diff';
 // import sharp from 'sharp';
 
-export async function DELETE ({ request }) {
-  return new Response('ok!');
-}
-
 export async function PATCH ({ request }) {
-  let filename = decodeURI(new url.URL(request.url).search.split('?')[1]);
-  if (filename.includes('..')) {
+  let filename = decodeURI(new url.URL(request.url).searchParams.get('filename'));
+  let pwd = decodeURI(new url.URL(request.url).searchParams.get('pwd'));
+
+  if (filename.includes('..') || pwd.includes('..')) {
     return new Response(400);
   }
-  let contents = await readFile(`${STORAGE_PATH}/static/download${filename}`);
+
+  let contents = await readFile(`${STORAGE_PATH}/static/download${pwd}${filename}`);
   contents = contents.toString();
   let patch = await request.text();
   
+  let patchName = parsePatch(patch)[0];
+  if (patchName.newFileName.includes('..')) {
+    return new Response(400);
+  }
+
+  if (patchName.newFileName != patchName.oldFileName) {
+    rename(`${STORAGE_PATH}/static/download/${pwd}${filename}`, `${STORAGE_PATH}/static/download/${pwd}${patchName.newFileName}`)
+    return new Response('ok!');
+  }
   let result = applyPatch(contents, patch);
 
-  await writeFile(`${STORAGE_PATH}/static/download/${filename}`, result);
-  // console.log(String(contents));
+  await writeFile(`${STORAGE_PATH}/static/download/${pwd}${filename}`, result);
   
   return new Response('ok!');
 };
