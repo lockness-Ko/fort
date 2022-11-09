@@ -10,6 +10,10 @@ A minimalistic alternative to nextcloud.
 ![](assets/upload.png)
 ![](assets/mobile.png)
 
+This one's the lighthouse score through a slow vpn connection in a different country connecting to an instance on a residential ip!
+
+![](assets/lighthouse.png)
+
 ## Installation
 
 To install, all you need is docker and docker-compose and common sense (please don't use the default credentials).
