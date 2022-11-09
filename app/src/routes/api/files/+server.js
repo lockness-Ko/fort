@@ -5,6 +5,10 @@ import url from 'url';
 import { applyPatch } from 'diff';
 // import sharp from 'sharp';
 
+export async function DELETE ({ request }) {
+  return new Response('ok!');
+}
+
 export async function PATCH ({ request }) {
   let filename = decodeURI(new url.URL(request.url).search.split('?')[1]);
   if (filename.includes('..')) {
@@ -50,15 +54,17 @@ export async function GET({ url }) {
   let folder = url.searchParams.get('folder_name');
   let file = url.searchParams.get('name');
   
-  if (file.includes('..') || folder.includes('..')) {
-    return new Response(400);
-  }
-  
   if (folder != null) {
+    if (folder.includes('..')) {
+      return new Response(400);
+    }
     mkdir(`${STORAGE_PATH}/static/download/${folder}`, { recursive: true });
     mkdir(`${STORAGE_PATH}/static/thumb/${folder}`, { recursive: true });
     return new Response("ok!");
   } else if (file != null) {
+    if (file.includes('..')) {
+      return new Response(400);
+    }
     await writeFile(`${STORAGE_PATH}/static/download/${file}`, "");
     return new Response("ok!");
   }
