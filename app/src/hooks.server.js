@@ -17,7 +17,6 @@ export const handle = async ({ event, resolve }) => {
   const auth = event.request.headers.get("Cookie");
   
   let cookies = cookie.parse(auth);
-  console.log(cookies);
 
   let token
   try {
@@ -26,7 +25,6 @@ export const handle = async ({ event, resolve }) => {
       if (!jwt.verify(token, jwt_sig)) {
         return Response.redirect(`${event.url.origin}/login`, 302);
       } else {
-        console.log('Logged in!');
         return resolve(event);
       }
     }
