@@ -95,6 +95,7 @@ declare module '$env/static/private' {
 	export const OLDPWD: string;
 	export const LADSPA_PATH: string;
 	export const CADENCE_AUTO_STARTED: string;
+	export const NODE_ENV: string;
 }
 
 /**
@@ -193,6 +194,7 @@ declare module '$env/dynamic/private' {
 		OLDPWD: string;
 		LADSPA_PATH: string;
 		CADENCE_AUTO_STARTED: string;
+		NODE_ENV: string;
 		[key: string]: string | undefined;
 	}
 }
