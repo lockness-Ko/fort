@@ -11,7 +11,7 @@
     6: "sun",
   };
   function toDayName(day) {
-    return days[day]
+    return days[day % 7]
   }
 </script>
 
@@ -33,7 +33,7 @@
   {#each weather["forecast"] as forecast, i}
   <div class="weather-forecast-item">
     <h1>{forecast[0]}</h1>
-    <p>{toDayName(new Date().getDay() + i+1)}</p>
+    <p>{toDayName(new Date().getDay() + i)}</p>
     <p>🥵 {forecast[1]}{ weather["temperature_unit"] }</p>
     <p>🥶 {forecast[2]}{ weather["temperature_unit"] }</p>
   </div>
