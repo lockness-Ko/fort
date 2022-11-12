@@ -2,7 +2,7 @@ FROM alpine:latest
 
 # RUN pacman -Syu --noconfirm nginx nodejs npm
 RUN apk update
-RUN apk add nodejs npm nginx openssl
+RUN apk add nodejs npm nginx openssl redis
 
 COPY prepare.sh .
 RUN ./prepare.sh

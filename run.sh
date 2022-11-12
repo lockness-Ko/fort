@@ -15,6 +15,9 @@ echo $LON >> /app/.env
 
 cat /app/.env
 
+HASH=$(node ./run.js admin)
+redis-cli -h redis SET admin $HASH
+
 # Setup storage
 mkdir -p $STORAGE_PATH/static/download $STORAGE_PATH/static/thumb
 
