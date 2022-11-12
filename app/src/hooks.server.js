@@ -1,5 +1,6 @@
 import { Handle } from "@sveltejs/kit";
 import jwt from 'jsonwebtoken';
+import cookie from 'cookie';
 import { jwt_sig_store } from '$lib/components/stores.js';
 import { ADMIN_LOGIN } from "$env/static/private";
 
@@ -14,10 +15,13 @@ export const handle = async ({ event, resolve }) => {
   let whitelistedUrl = !url.pathname.startsWith('/share') && !url.pathname.startsWith('/login') && !url.pathname.startsWith('/api/login');
 
   const auth = event.request.headers.get("Cookie");
+  
+  let cookies = cookie.parse(auth);
+  console.log(cookies);
 
   let token
   try {
-    token = auth.split('=')[1];
+    token = cookies['sid'];
     if (whitelistedUrl) {
       if (!jwt.verify(token, jwt_sig)) {
         return Response.redirect(`${event.url.origin}/login`, 302);
