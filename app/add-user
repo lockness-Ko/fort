@@ -1,0 +1,8 @@
+#! /bin/bash
+
+. ./.env
+
+HASH=$(node ./run.js $2)
+redis-cli -h redis SET $1 $HASH
+
+mkdir -p $STORAGE_PATH/static/{download,thumb}/$1
