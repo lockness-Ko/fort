@@ -4,7 +4,7 @@ services:
   www:
     build: .
     ports:
-      - 8443:443
+      - 443:443
     environment:
       # please for the love of god, change this
       - ADMIN_LOGIN=admin:admin
@@ -15,3 +15,7 @@ services:
       - LON=0.00
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    command: redis-server --loglevel warning
