@@ -15,7 +15,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"bcrypt": "^5.1.0",
 		"diff": "^5.1.0",
+		"ioredis": "^5.2.4",
+		"jsonwebtoken": "^8.5.1",
 		"sveltefileuploadcomponent": "^0.1.0"
 	}
 }
