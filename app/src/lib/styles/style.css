@@ -22,6 +22,14 @@ a {
   color: #ddd;
 }
 
+input {
+  background-color: #0000;
+  color: white;
+  border: none;
+  font-size: 30px;
+  outline: none;
+}
+
 .weather-current {
   display: flex;
   flex-direction: row;
