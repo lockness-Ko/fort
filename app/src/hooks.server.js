@@ -16,10 +16,10 @@ export const handle = async ({ event, resolve }) => {
 
   const auth = event.request.headers.get("Cookie");
   
-  let cookies = cookie.parse(auth);
 
   let token
   try {
+    let cookies = cookie.parse(auth);
     token = cookies['sid'];
     if (whitelistedUrl) {
       if (!jwt.verify(token, jwt_sig)) {
