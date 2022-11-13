@@ -16,6 +16,12 @@
     contents_promise = fetch(`/download/?${pwd}${slug}`).then((x) => x.text());
   }
   
+  function share(e) {
+    fetch(`/api/share?filename=${pwd}${slug}`, {
+      method: 'POST'
+    }).then(x => x.text()).then(y => alert(`https://${window.location.host}${y}`));
+  }
+  
   function editDiff(e) {
     let patch = createPatch(slug, diff, e.target.value, "", "");
     fetch(`/api/files?pwd=${pwd}&filename=${slug}`, {
@@ -45,7 +51,7 @@
 </head>
 
 <div class="header">
-  <input type="text" on:change={nameDiff} value={slug}/> <span><a href="/delete?{pwd}{slug}">delete</a><a href="/download/?{pwd}{slug}" download>download</a></span>
+  <input type="text" on:change={nameDiff} value={slug}/> <span><button on:click={share}>share</button><a href="/delete?{pwd}{slug}">delete</a><a href="/download/?{pwd}{slug}" download>download</a></span>
 </div>
 
 <hr/>
@@ -77,8 +83,15 @@
     margin-right: 10px;
   }
   
-  span a {
+  span a, span button {
     margin: 10px;
+  }
+  
+  button {
+    border: none;
+    background-color: inherit;
+    color: #ddd;
+    font-size: 18px;
   }
   
   .header {

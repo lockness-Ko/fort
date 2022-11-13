@@ -21,7 +21,7 @@ export const handle = async ({ event, resolve }) => {
   try {
     let cookies = cookie.parse(auth);
     token = cookies['sid'];
-    if (whitelistedUrl) {
+    if (!whitelistedUrl) {
       if (!jwt.verify(token, jwt_sig)) {
         return Response.redirect(`${event.url.origin}/login`, 302);
       } else {
@@ -30,7 +30,7 @@ export const handle = async ({ event, resolve }) => {
     }
   } catch {}
 
-  if (!whitelistedUrl) {
+  if (whitelistedUrl) {
     return resolve(event);
   } else {
     return Response.redirect(`${event.url.origin}/login`, 302);
