@@ -26,10 +26,6 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const ADMIN_LOGIN: string;
-	export const STORAGE_PATH: string;
-	export const LAT: string;
-	export const LON: string;
 	export const SHELL: string;
 	export const npm_command: string;
 	export const WINDOWID: string;
@@ -124,10 +120,6 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		ADMIN_LOGIN: string;
-		STORAGE_PATH: string;
-		LAT: string;
-		LON: string;
 		SHELL: string;
 		npm_command: string;
 		WINDOWID: string;

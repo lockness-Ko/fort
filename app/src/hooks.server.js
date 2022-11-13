@@ -26,7 +26,9 @@ export const handle = async ({ event, resolve }) => {
       } else {
         return resolve(event);
       }
-    } catch {}
+    } catch {
+      return Response.redirect(`${event.url.origin}/login`, 302);
+    }
   } else {
     return resolve(event);
   }
