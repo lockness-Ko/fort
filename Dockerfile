@@ -4,6 +4,15 @@ FROM alpine:latest
 RUN apk update
 RUN apk add nodejs npm nginx openssl redis
 
+# Environment vars
+ARG STORAGE_PATH
+ENV STORAGE_PATH $STORAGE_PATH
+
+ARG LAT
+ARG LON
+ENV LAT $LAT
+ENV LON $LON
+
 COPY prepare.sh .
 RUN ./prepare.sh
 

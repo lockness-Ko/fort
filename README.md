@@ -18,7 +18,17 @@ This one's the lighthouse score through a slow vpn connection in a different cou
 
 To install, all you need is docker and docker-compose and common sense (please don't use the default credentials).
 
-You WILL need to edit `docker-compose.yml` and change the default credentials (`ADMIN_LOGIN`). You may also want to change the storage location for persistent storage (`STORAGE_PATH`).
+You should edit `docker-compose.yml` and change the storage location for persistent storage (`STORAGE_PATH`).
+
+The default login is `admin:admin`. You can change this and add new users by running the `add-user` script:
+
+```bash
+# Change admin password
+docker-compose exec -it www /app/add-user "admin" "password"
+
+# Add a new user
+docker-compose exec -it www /app/add-user "username" "password"
+```
 
 You'll also need to edit the `LAT` and `LON` environment variables if you want accurate weather info.
 
