@@ -50,7 +50,7 @@ and visit the webpage in your browser.
    - [x] TLS support
  - [ ] Users and access control
    - [x] Better cookie+jwt based auth
-   - [ ] Access control
+   - [x] Access control
    - [ ] Sharing files and folders
  - [ ] Upload progress bar
  - [x] Support multiple files
