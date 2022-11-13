@@ -12,7 +12,11 @@
     }
     
     if (elem.children[2].textContent == "directory") {
-      pwd += elem.children[0].textContent + "/";
+      if (!pwd.endsWith("/")) {
+        pwd += "/" + elem.children[0].textContent + "/";
+      } else {
+        pwd += elem.children[0].textContent + "/";
+      }
       files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
     }
   }
@@ -31,7 +35,10 @@
     let temPwd = pwd.split("/");
     temPwd.pop();
     temPwd.pop();
-    pwd = "/" + temPwd.join("/");
+    pwd = temPwd.join("/");
+    if (pwd == "") {
+      pwd = "/"
+    }
     files_promise = fetch(`/api/files?pwd=${pwd}`).then((x) => x.json());
   }
 </script>
