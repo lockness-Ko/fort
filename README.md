@@ -30,6 +30,21 @@ docker-compose up -d
 
 and visit the webpage in your browser.
 
+## Authentication/Authorizing
+
+Since I will probably forget how I've implemented authentication in the future, here's how I did it:
+
+- User clicks login
+- Server checks password against bcrypt hash in private db (the key is the user)
+- If the user has the right password continue, otherwise return 401
+- Create a JWT that stores the user as the payload
+- JWT is signed by the server
+- User can use this jwt cookie as authorization to prove they are a specific user
+
+### Mitigations agaisnt JWT bruteforcing
+
+When the server starts up for the first time, it generates a random string of 2048 chars out of a choice of 88 chars. This is an arbitrary number that I think is **strong enough** against bruteforcing. Feel free to disagree with a pr.
+
 ## Todo
 
  - [x] Docker support
