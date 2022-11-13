@@ -63,10 +63,10 @@ When the server starts up for the first time, it generates a random string of 20
    - [x] HTTP/2 support
    - [ ] HTTP/3 support
    - [x] TLS support
- - [ ] Users and access control
+ - [x] Users and access control
    - [x] Better cookie+jwt based auth
    - [x] Access control
-   - [ ] Sharing files and folders
+   - [x] Sharing files and folders
  - [ ] Upload progress bar
  - [x] Support multiple files
  - [x] The weather and stuff
