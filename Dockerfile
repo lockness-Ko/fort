@@ -2,7 +2,7 @@ FROM alpine:latest
 
 # RUN pacman -Syu --noconfirm nginx nodejs npm
 RUN apk update
-RUN apk add nodejs npm nginx openssl redis
+RUN apk add nodejs npm nginx openssl redis bash
 
 # Environment vars
 ARG STORAGE_PATH

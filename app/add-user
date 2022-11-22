@@ -1,6 +1,6 @@
 #! /bin/bash
 
-. ./.env
+#. ./.env
 
 HASH=$(node ./run.js $2)
 redis-cli -h redis SET $1 $HASH
