@@ -12,7 +12,7 @@ jwt_sig_store.subscribe(value => {
 
 export const handle = async ({ event, resolve }) => {
   const url = new URL(event.request.url);
-  let whitelistedUrl = !url.pathname.startsWith('/share') && !url.pathname.startsWith('/login') && !url.pathname.startsWith('/api/login');
+  let whitelistedUrl = !url.pathname.startsWith('/share') && !url.pathname.startsWith('/api/share') && !url.pathname.startsWith('/login') && !url.pathname.startsWith('/api/login');
 
   const auth = event.request.headers.get("Cookie");
   
