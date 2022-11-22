@@ -2,6 +2,7 @@
   import { page } from '$app/stores';
   
   let slug = $page.params.slug;
+  let thumb = `/api/share?${slug}`;
   
   let diff = "";
   
@@ -12,6 +13,11 @@
     contents_promise = fetch(`/api/share?${slug}`).then((x) => x.text());
   }
 </script>
+
+<head>
+  <meta name="twitter:image" content="{thumb}">
+  <meta name="og:image" content="{thumb}">
+</head>
 
 <div class="header">
   <input type="text" value={slug}/> <span><a href="/api/share?{slug}" download>download</a></span>
