@@ -2,6 +2,8 @@ import { STORAGE_PATH } from '$env/static/private'
 import { unlink } from 'fs/promises';
 import { redirect } from '@sveltejs/kit';
 import url from 'url';
+import cookie from 'cookie';
+import jwt from 'jsonwebtoken';
 
 export async function GET ({ request }) {
   let cookies = cookie.parse(request.headers.get('cookie'));
