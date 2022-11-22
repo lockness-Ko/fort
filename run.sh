@@ -1,7 +1,7 @@
 #! /bin/ash
 
-HASH=$(node ./run.js admin)
-redis-cli -h redis SET admin $HASH
+# Add users
+/app/add-user "admin" "admin"
 
 # Setup storage
 mkdir -p $STORAGE_PATH/static/download $STORAGE_PATH/static/thumb $STORAGE_PATH/static/share
