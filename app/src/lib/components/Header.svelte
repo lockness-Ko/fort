@@ -4,6 +4,9 @@
   <nav>
     <ul>
       <li>
+        <a href="/todo">todo</a>
+      </li>
+      <li>
         <a href="/upload">upload</a>
       </li>
     </ul>
