@@ -33,7 +33,9 @@ export async function POST ({ request }) {
     throw error(401);
   }
   
-  let token = jwt.sign({ user: user }, jwt_sig);
+  let token = jwt.sign({ user: user }, jwt_sig, {
+    expiresIn: "30m"
+  });
   
   let heads = new Headers();
   heads.append('Set-Cookie', `sid=${token}; Max-Age=1200; Path=/; SameSite=Strict`)
